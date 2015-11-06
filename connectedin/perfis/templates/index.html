@@ -1,10 +1,32 @@
+{% load staticfiles%}
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
 		<title>ConnectedIn</title>
+		<link rel="stylesheet" href="{% static "styles/bootstrap.css"%} ">
+		<link rel="stylesheet" href="{% static "styles/main.css"%} ">
 	</head>
 	<body>
+
+		<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li><a href="{% url 'index'%}">NOME</a></li>
+				<li><a href="/logout/">Logout</a></li>
+			</ul>
+			<h3 class="text-muted">ConnectedIn</h3>
+		</div>
 		<h1>Bem vindo ao ConnectedIn</h1>
+		{% if perfis %}
+		<ul>
+			{% for perfil in perfis %}
+			<li>
+				<a href="{% url 'exibir' perfil.id %}">{{ perfil.nome}} / {{ perfil.email }}</a>
+			</li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>Nenhum Perfil encontrado</p>
+		{% endif %}
 	</body>
 </html>
